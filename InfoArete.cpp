@@ -1,49 +1,62 @@
-//
-//  InfoAreteCarte.cpp
-//  projet_IA
-//
-//  Created by Quentin Vecchio on 16/02/2015.
-//  Copyright (c) 2015 Quentin Vecchio. All rights reserved.
-//
-
 #include "InfoArete.h"
 
-InfoAreteCarte::InfoAreteCarte(const double c) {
+InfoArete::InfoArete(const string &nom, const int &c, const int &t) {
     this->setCout(c);
+    this->setNom(nom);
+    this->setTemps(t);
 }
 
-InfoAreteCarte::InfoAreteCarte() {
+InfoArete::InfoArete() {
     this->setCout(0);
 }
 
-InfoAreteCarte::InfoAreteCarte(const InfoAreteCarte &i) {
+InfoArete::InfoArete(const InfoArete &i) {
     this->cout = i.cout;
+    this->name = i.name;
+    this->temps = i.temps;
 }
 
-InfoAreteCarte::~InfoAreteCarte() {
+InfoArete::~InfoArete() {
     
 }
 
-double InfoAreteCarte::getCout() const {
+string InfoArete::getNom() const {
+    return this->name;
+}
+
+int InfoArete::getCout() const {
     return this->cout;
 }
 
-void InfoAreteCarte::setCout(const double cout) {
-    if(cout >= 0.0)
+int InfoArete::getTemps() const {
+    return this->temps;
+}
+
+void InfoArete::setNom(const string &name) {
+    this->name = name;
+}
+
+void InfoArete::setCout(const int &cout) {
+    if(cout >= 0)
         this->cout = cout;
 }
 
-string InfoAreteCarte::toString() const {
+void InfoArete::setTemps(const int &temps) {
+    if(temps >= 0)
+        this->temps = temps;
+}
+
+string InfoArete::toString() const {
     ostringstream oss;
-    oss << this->cout;
+    oss << this->name << " (" << this->cout << "," << this->temps << ")";
     return oss.str();
 }
 
-InfoAreteCarte* InfoAreteCarte::copy() const {
-    return new InfoAreteCarte(*this);
+InfoArete* InfoArete::copy() const {
+    return new InfoArete(*this);
 }
 
-ostream &operator <<(ostream &os, const InfoAreteCarte &i) {
+ostream &operator <<(ostream &os, const InfoArete &i) {
     os << i.toString();
     return os;
 }

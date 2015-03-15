@@ -1,63 +1,65 @@
-//
-//  InfoSommetCarte.cpp
-//  projet_IA
-//
-//  Created by Quentin Vecchio on 16/02/2015.
-//  Copyright (c) 2015 Quentin Vecchio. All rights reserved.
-//
-
 #include "InfoSommet.h"
 
-InfoSommetCarte::InfoSommetCarte(const string nom, Point2D *position) {
+InfoSommet::InfoSommet(const string &nom, const int &borneInfFenetre, const int &borneSupFenetre) {
     this->nom = nom;
-    this->pos = position;
+    this->borneInfFenetre = borneInfFenetre;
+    this->borneSupFenetre = borneSupFenetre;
 }
 
-InfoSommetCarte::InfoSommetCarte() {
+InfoSommet::InfoSommet() {
     this->nom = "NULL";
-    this->pos = NULL;
+    this->borneInfFenetre = this->borneSupFenetre = 0;
 }
 
-InfoSommetCarte::InfoSommetCarte(const InfoSommetCarte &info) {
+InfoSommet::InfoSommet(const InfoSommet &info) {
     this->nom = info.getNom();
-    this->pos = info.getPosition();
+    this->borneInfFenetre = info.getBorneInfFenetre();
+    this->borneSupFenetre = info.getBorneSupFenetre();
 }
 
-InfoSommetCarte::~InfoSommetCarte() {
+InfoSommet::~InfoSommet() {
     
 }
 
-string InfoSommetCarte::getNom() const {
+string InfoSommet::getNom() const {
     return this->nom;
 }
 
-Point2D* InfoSommetCarte::getPosition() const {
-    return this->pos;
+int InfoSommet::getBorneInfFenetre() const {
+    return this->borneInfFenetre;
 }
 
-void InfoSommetCarte::setNom(const string s) {
+int InfoSommet::getBorneSupFenetre() const {
+    return this->borneSupFenetre;
+}
+
+void InfoSommet::setNom(const string &s) {
     this->nom = s;
 }
 
-void InfoSommetCarte::setPosition(const Point2D position) {
-    this->pos = position.copy();
+void InfoSommet::setBorneInfFenetre(const int &b) {
+    this->borneInfFenetre = b;
 }
 
-string InfoSommetCarte::toString() const {
+void InfoSommet::setBorneSupFenetre(const int &b) {
+    this->borneSupFenetre = b;
+}
+
+string InfoSommet::toString() const {
     ostringstream oss;
-    oss <<  this->nom << ", position : " << *(this->pos);
+    oss <<  this->nom << ", borne Inf : " << this->borneInfFenetre << ", borne Sup : " << this->borneSupFenetre;
     return oss.str();
 }
 
-InfoSommetCarte* InfoSommetCarte::copy() const {
-    return new InfoSommetCarte(*this);
+InfoSommet* InfoSommet::copy() const {
+    return new InfoSommet(*this);
 }
 
-ostream &operator <<(ostream &os, const InfoSommetCarte &i) {
+ostream &operator <<(ostream &os, const InfoSommet &i) {
     os << i.toString();
     return os;
 }
 
-bool operator== (const InfoSommetCarte s1, const InfoSommetCarte s2) {
+bool operator== (const InfoSommet s1, const InfoSommet s2) {
     return (s1.getNom() == s2.getNom());
 }

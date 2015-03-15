@@ -1,20 +1,10 @@
-//
-//  Graphe.h
-//  projet_IA
-//
-//  Created by Quentin Vecchio on 07/02/2015.
-//  Copyright (c) 2015 Quentin Vecchio. All rights reserved.
-//
-
 #ifndef projet_IA_Graphe_h
 #define projet_IA_Graphe_h
 
 #include <iostream>
-#include <sstream>
 #include "Sommet.h"
 #include "Arete.h"
 #include "PElement.h"
-#include "Erreur.h"
 
 using namespace std;
 
@@ -55,9 +45,13 @@ public:
     }
     
     Sommet<T>* creeSommet(const T &v) {
-        Sommet<T> *s = new Sommet<T>(this->cle++, v);
-        this->listeSommets = new PElement<Sommet<T> >(s,this->listeSommets);
-        return s;
+        if(getSommetByValue(v) == NULL) {
+            Sommet<T> *s = new Sommet<T>(this->cle++, v);
+            this->listeSommets = new PElement<Sommet<T> >(s,this->listeSommets);
+            return s;
+        } else {
+            return getSommetByValue(v);
+        }
     }
     
     Arete<S,T>* creeArete(Sommet<T> * d, Sommet<T> * f, const S &v) {
@@ -70,14 +64,10 @@ public:
                 return a;
             }
             else
-            {
-                Erreur("Un des sommets n'appartient pas au graphe.");
-            }
+                cout << "Un des sommets n'appartient pas au graphe." << endl;
         }
         else
-        {
-            Erreur("Un des sommets est invalide.");
-        }
+                cout << "Un des sommets est invalide." << endl;
         return NULL;
     }
     
@@ -101,21 +91,6 @@ public:
         return PElement<Arete<S,T> >::appartient(a,this->listeAretes);
     }
     
-    bool valueIsInThis(Sommet<T> *s) {
-        if(s == NULL)
-            return false;
-        PElement<Sommet<T> > *p = this->listeSommets;
-        while(p != NULL)
-        {
-            if(p->getV()->getV() == s->getV())
-            {
-                return true;
-            }
-            p = p->getS();
-        }
-        return false;
-    }
-    
     Arete<S,T> * getAreteParSommets(const Sommet<T> *s1, const Sommet<T> * s2) {
         if(PElement<Sommet<T> >::appartient(s1,this->listeSommets) || PElement<Sommet<T> >::appartient(s2,this->listeSommets))
         {
@@ -128,9 +103,7 @@ public:
             }
         }
         else
-        {
-            Erreur("Un des sommets est inexistant dans le graphe.");
-        }
+            cout << "Un des sommets est inexistant dans le graphe." << endl;
         return NULL;
     }
     
@@ -165,11 +138,8 @@ public:
             return r;
         }
         else
-        {
-            Erreur("Sommet inexistant dans le graphe.");
-            return NULL;
-        }
-
+            cout << "Sommet inexistant dans le graphe." << endl;
+        return NULL;
     }
     
     string toString() const {
@@ -211,6 +181,7 @@ public:
         }
         return chemin;
     }
+
 };
 
 template <class S, class T>

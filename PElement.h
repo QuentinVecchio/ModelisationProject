@@ -1,17 +1,8 @@
-//
-//  PElement.h
-//  projet_IA
-//
-//  Created by Quentin Vecchio on 07/02/2015.
-//  Copyright (c) 2015 Quentin Vecchio. All rights reserved.
-//
-
 #ifndef projet_IA_PElement_h
 #define projet_IA_PElement_h
 
 #include <iostream>
 #include <sstream>
-#include "Erreur.h"
 
 using namespace std;
 
@@ -52,7 +43,7 @@ public:
         if( v != NULL)
             this->v = v;
         else
-            Erreur("La valeur vaut NULL");
+            cout << "La valeur vaut NULL" << endl;
     }
     
     PElement<T> * getS() {
@@ -92,9 +83,7 @@ public:
             return r;
         }
         else
-        {
-            Erreur("La position donnée n'existe pas.");
-        }
+            cout << "La position donnée n'existe pas." << endl;
         return NULL;
     }
     

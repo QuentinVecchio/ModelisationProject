@@ -14,19 +14,19 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = ProjetIA_Client
 TEMPLATE = app
 
-HEADERS += Arete.h
-HEADERS += Erreur.h
-HEADERS += GElement.h
-HEADERS += Graphe.h
-HEADERS += InfoArete.h
-HEADERS += InfoSommet.h
-HEADERS += PElement.h
-HEADERS += Point2D.h
-HEADERS += Sommet.h
-HEADERS += TestUnitaire.h
+HEADERS += Arete.h \
+    Fonctions.h \
+    GElement.h \
+    Graphe.h \
+    InfoArete.h \
+    InfoSommet.h \
+    PElement.h \
+    Sommet.h \
+    TestUnitaire.h \
+    InfoGraphe.h
 
-SOURCES += main.cpp
-SOURCES += GElement.cpp
-SOURCES += InfoArete.cpp
-SOURCES += InfoSommet.cpp
-SOURCES += Point2D.cpp
+SOURCES += main.cpp \
+    GElement.cpp \
+    InfoArete.cpp \
+    InfoSommet.cpp \
+    InfoGraphe.cpp

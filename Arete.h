@@ -1,11 +1,3 @@
-//
-//  Arete.h
-//  projet_IA
-//
-//  Created by Quentin Vecchio on 07/02/2015.
-//  Copyright (c) 2015 Quentin Vecchio. All rights reserved.
-//
-
 #ifndef projet_IA_Arete_h
 #define projet_IA_Arete_h
 
@@ -37,7 +29,8 @@ public:
     }
 
     ~Arete<S,T>() {
-
+        delete this->initial;
+        delete this->final;
     }
     
     bool estEgal(const Sommet<T> * s1, const Sommet<T> * s2) const {

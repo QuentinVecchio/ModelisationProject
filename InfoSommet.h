@@ -1,39 +1,36 @@
-//
-//  InfoSommetCarte.h
-//  projet_IA
-//
-//  Created by Quentin Vecchio on 16/02/2015.
-//  Copyright (c) 2015 Quentin Vecchio. All rights reserved.
-//
-
-#ifndef __projet_IA__InfoSommetCarte__
-#define __projet_IA__InfoSommetCarte__
+#ifndef __projet_IA__InfoSommet__
+#define __projet_IA__InfoSommet__
 
 #include <iostream>
-#include "Point2D.h"
+#include <sstream>
 
 using namespace std;
 
-class InfoSommetCarte
+class InfoSommet
 {
 private:
     string nom;
-    Point2D *pos;
+    int borneInfFenetre;
+    int borneSupFenetre;
+
 public:
-    InfoSommetCarte();
-    InfoSommetCarte(const string nom,Point2D *position);
-    InfoSommetCarte(const InfoSommetCarte &info);
-    ~InfoSommetCarte();
+    InfoSommet();
+    InfoSommet(const string &nom, const int &borneInfFenetre, const int &borneSupFenetre);
+    InfoSommet(const InfoSommet &info);
+    ~InfoSommet();
     
     string getNom() const;
-    Point2D* getPosition() const;
-    void setNom(const string s);
-    void setPosition(const Point2D position);
-    
+    int getBorneInfFenetre() const;
+    int getBorneSupFenetre() const;
+
+    void setNom(const string &s);
+    void setBorneInfFenetre(const int &b);
+    void setBorneSupFenetre(const int &b);
+
     string toString() const;
-    InfoSommetCarte* copy() const;
+    InfoSommet* copy() const;
 };
 
-ostream &operator <<(ostream &os, const InfoSommetCarte &i);
-bool operator== (const InfoSommetCarte s1, const InfoSommetCarte s2);
+ostream &operator <<(ostream &os, const InfoSommet &i);
+bool operator== (const InfoSommet s1, const InfoSommet s2);
 #endif

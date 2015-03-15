@@ -1,11 +1,3 @@
-//
-//  GElement.cpp
-//  projet_IA
-//
-//  Created by Quentin Vecchio on 08/02/2015.
-//  Copyright (c) 2015 Quentin Vecchio. All rights reserved.
-//
-
 #include "GElement.h"
 
 GElement::GElement(const int c) {

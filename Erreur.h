@@ -1,11 +1,3 @@
-//
-//  Erreur.h
-//  projet_IA
-//
-//  Created by Quentin Vecchio on 19/02/2015.
-//  Copyright (c) 2015 Quentin Vecchio. All rights reserved.
-//
-
 #ifndef __projet_IA__Erreur__
 #define __projet_IA__Erreur__
 
