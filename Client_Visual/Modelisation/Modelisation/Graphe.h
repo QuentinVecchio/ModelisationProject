@@ -69,7 +69,7 @@ public:
 		return NULL;
 	}
 
-	int nombreSommets() const {
+	const int nombreSommets() const {
 		return PElement<Sommet<T> >::taille(this->listeSommets);
 	}
 
