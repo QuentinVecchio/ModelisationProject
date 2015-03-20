@@ -1,0 +1,189 @@
+#include <iostream>
+#include "Sommet.h"
+#include "Arete.h"
+#include "PElement.h"
+
+using namespace std;
+
+template <class S, class T>
+class Graphe
+{
+private:
+	int cle;
+	PElement<Sommet<T> > *listeSommets;
+	PElement<Arete<S, T> > *listeAretes;
+
+public:
+	Graphe<S, T>() {
+		this->cle = 0;
+		this->listeSommets = NULL;
+		this->listeAretes = NULL;
+	}
+
+	Graphe<S, T>(const Graphe &g) {
+		this->cle = g.cle;
+		this->listeSommets = g.listeSommets;
+		this->listeAretes = g.listeAretes;
+	}
+
+	~Graphe<S, T>() {
+		PElement<Sommet<T> >::efface2(this->listeSommets);
+		PElement<Arete<S, T> >::efface2(this->listeAretes);
+		delete this->listeSommets;
+		delete this->listeAretes;
+	}
+
+	PElement<Sommet<T> >* getListeSommets() const {
+		return this->listeSommets;
+	}
+
+	PElement<Arete<S, T> >* getListeAretes() const {
+		return this->listeAretes;
+	}
+
+	Sommet<T>* creeSommet(T *v) {
+		if (getSommetByValue(v) == NULL) {
+			Sommet<T> *s = new Sommet<T>(this->cle++, v);
+			this->listeSommets = new PElement<Sommet<T> >(s, this->listeSommets);
+			return s;
+		}
+		else {
+			return getSommetByValue(v);
+		}
+	}
+
+	Arete<S, T>* creeArete(Sommet<T> * d, Sommet<T> * f, S *v) {
+		if (d != NULL || f != NULL)
+		{
+			if (PElement<Sommet<T> >::appartient(d, this->listeSommets) && PElement<Sommet<T> >::appartient(f, this->listeSommets))
+			{
+				Arete<S, T> *a = new Arete<S, T>(this->cle++, d, f, v);
+				this->listeAretes = new PElement<Arete<S, T> >(a, this->listeAretes);
+				return a;
+			}
+			else
+				cout << "Un des sommets n'appartient pas au graphe." << endl;
+		}
+		else
+			cout << "Un des sommets est invalide." << endl;
+		return NULL;
+	}
+
+	int nombreSommets() const {
+		return PElement<Sommet<T> >::taille(this->listeSommets);
+	}
+
+	int nombreAretes() const {
+		return PElement<Arete<S, T> >::taille(this->listeAretes);
+	}
+
+	bool sommetIsInThis(Sommet<T> *s) {
+		if (s == NULL)
+			return false;
+		return PElement<Sommet<T> >::appartient(s, this->listeSommets);
+	}
+
+	bool areteIsInThis(Arete<S, T> *a) {
+		if (a == NULL)
+			return false;
+		return PElement<Arete<S, T> >::appartient(a, this->listeAretes);
+	}
+
+	Arete<S, T> * getAreteParSommets(const Sommet<T> *s1, const Sommet<T> * s2) {
+		if (PElement<Sommet<T> >::appartient(s1, this->listeSommets) || PElement<Sommet<T> >::appartient(s2, this->listeSommets))
+		{
+			PElement<Arete<S, T> > *pointeur = this->listeAretes;
+			while (pointeur != NULL)
+			{
+				if (pointeur->getV()->estEgal(s1, s2) == true)
+					return pointeur->getV();
+				pointeur = pointeur->getS();
+			}
+		}
+		else
+			cout << "Un des sommets est inexistant dans le graphe." << endl;
+		return NULL;
+	}
+
+	Sommet<T> * getSommetByValue(T *v) {
+		PElement<Sommet<T> > *p = this->listeSommets;
+		while (p != NULL)
+		{
+			if (p->getV()->getV() == v)
+				return p->getV();
+			p = p->getS();
+		}
+		return NULL;
+	}
+
+	PElement< pair< Sommet<T>*, Arete<S, T>* > >  *adjacences(Sommet<T> * s) {
+		if (this->listeSommets->appartient(s, this->listeSommets))
+		{
+			PElement<Arete<S, T> > *l;
+			PElement<pair<Sommet<T>*, Arete<S, T>*> > *r;
+			for (l = listeAretes, r = NULL; l; l = l->getS())
+			{
+				if (s == l->getV()->getInital())
+				{
+					r = new PElement<pair<Sommet<T> *, Arete<S, T>*> >(new pair< Sommet<T> *, Arete<S, T>* >(l->getV()->getFinal(), l->getV()), r);
+				}
+				else
+				{
+					if (s == l->getV()->getFinal())
+						r = new PElement< pair< Sommet<T> *, Arete<S, T>* > >(new pair< Sommet<T> *, Arete<S, T>* >(l->getV()->getInital(), l->getV()), r);
+				}
+			}
+			return r;
+		}
+		else
+			cout << "Sommet inexistant dans le graphe." << endl;
+		return NULL;
+	}
+
+	string toString() const {
+		ostringstream oss;
+		oss << "Sommets : " << endl << *listeSommets << endl;
+		oss << "Aretes : " << endl << *listeAretes << endl;
+		return oss.str();
+	}
+
+	Graphe* copy() const {
+		return new Graphe(*this);
+	}
+
+	void rendreComplet() {
+		PElement<Sommet<T> > *pointeur = this->listeSommets;
+		while (pointeur != NULL)
+		{
+			PElement<Sommet<T> > *pointeur2 = this->listeSommets;
+			while (pointeur2 != NULL)
+			{
+				if (pointeur != pointeur2)
+				{
+					if (this->getAreteParSommets(pointeur->getV(), pointeur2->getV()) == NULL)
+						this->creeArete(pointeur->getV(), pointeur2->getV(), INT_MAX);
+				}
+				pointeur2 = pointeur2->getS();
+			}
+			pointeur = pointeur->getS();
+		}
+	}
+
+	static double coutChemin(Graphe<S, T> *g) {
+		double chemin = 0;
+		PElement<Arete<S, T> > *a = g->listeAretes;
+		while (a != NULL)
+		{
+			chemin += a->getV()->getV().getCout();
+			a = a->getS();
+		}
+		return chemin;
+	}
+
+};
+
+template <class S, class T>
+ostream &operator <<(ostream &os, const Graphe<S, T> &g){
+	os << g.toString();
+	return os;
+}
