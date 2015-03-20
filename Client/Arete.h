@@ -10,9 +10,9 @@ class Arete : public GElement {
 private:
     Sommet<T> *initial;
     Sommet<T> *final;
-    S v;
+    S *v;
 public:
-    Arete<S,T>(const int clef ,Sommet<T> *init, Sommet<T> *fin, const S v) : GElement(clef) {
+    Arete<S,T>(const int clef ,Sommet<T> *init, Sommet<T> *fin, S* v) : GElement(clef) {
         this->setInitial(init);
         this->initial->setDegre(this->initial->getDegre() + 1);
         this->setFinal(fin);
@@ -37,11 +37,11 @@ public:
         return (s1 == this->initial && s2 == this->final) || (s2 == this->initial && s1 == this->final);
     }
     
-    S getV() const {
+    S* getV() const {
         return this->v;
     }
     
-    void setV(const S v) {
+    void setV(S *v) {
         this->v  = v;
     }
     
@@ -65,8 +65,14 @@ public:
     
     string toString() const {
         ostringstream oss;
-        oss << "Clef : " << this->getClef() << ", Sommet Inital : [" <<  *this->getInital() << "], Sommet Final : [" << *this->getFinal() << "] , Valeur : " << this->getV() << endl;
+        oss << "[Clef : " << this->getClef() <<", Valeur : " << *this->getV() << endl << "Sommet Inital : [" <<  *this->getInital() << "]," << endl << "Sommet Final : [" << *this->getFinal() << "]" << endl << "]" << endl;
         return oss.str();
     }
 };
+
+template <class S, class T>
+ostream &operator <<(ostream &os, const Arete<S,T> &a){
+    os << a.toString();
+    return os;
+}
 #endif

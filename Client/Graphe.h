@@ -44,7 +44,7 @@ public:
         return this->listeAretes;
     }
     
-    Sommet<T>* creeSommet(const T &v) {
+    Sommet<T>* creeSommet(T *v) {
         if(getSommetByValue(v) == NULL) {
             Sommet<T> *s = new Sommet<T>(this->cle++, v);
             this->listeSommets = new PElement<Sommet<T> >(s,this->listeSommets);
@@ -54,7 +54,7 @@ public:
         }
     }
     
-    Arete<S,T>* creeArete(Sommet<T> * d, Sommet<T> * f, const S &v) {
+    Arete<S,T>* creeArete(Sommet<T> * d, Sommet<T> * f, S *v) {
         if(d != NULL || f != NULL)
         {
             if(PElement<Sommet<T> >::appartient(d,this->listeSommets) && PElement<Sommet<T> >::appartient(f,this->listeSommets))
@@ -107,7 +107,7 @@ public:
         return NULL;
     }
     
-    Sommet<T> * getSommetByValue(const T &v) {
+    Sommet<T> * getSommetByValue(T *v) {
         PElement<Sommet<T> > *p = this->listeSommets;
         while (p != NULL)
         {

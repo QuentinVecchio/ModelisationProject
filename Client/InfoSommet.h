@@ -3,6 +3,9 @@
 
 #include <iostream>
 #include <sstream>
+#include <vector>
+#include "Fenetre.h"
+#include "Etiquette.h"
 
 using namespace std;
 
@@ -10,22 +13,33 @@ class InfoSommet
 {
 private:
     string nom;
-    int borneInfFenetre;
-    int borneSupFenetre;
+    vector<Fenetre *> *bornes;
+    vector<Etiquette *> *etiquettes;
 
 public:
     InfoSommet();
-    InfoSommet(const string &nom, const int &borneInfFenetre, const int &borneSupFenetre);
+    InfoSommet(const string &nom);
     InfoSommet(const InfoSommet &info);
     ~InfoSommet();
     
     string getNom() const;
-    int getBorneInfFenetre() const;
-    int getBorneSupFenetre() const;
+    Fenetre* getBorneAtId(const int &id) const;
+    Etiquette* getEtiquetteAtId(const int &id) const;
+    vector<Fenetre *>* getBornes() const;
+    vector<Etiquette *>* getEtiquettes() const;
 
     void setNom(const string &s);
-    void setBorneInfFenetre(const int &b);
-    void setBorneSupFenetre(const int &b);
+    void setBorneAtId(const int &id, Fenetre *f);
+    void setEtiquetteAtId(const int &id, Etiquette *e);
+
+    void addBorne(Fenetre *f);
+    void addEtiquette(Etiquette *);
+    void removeBorneAtId(const int &id);
+    void removeBorneAll();
+    void removeEtiquetteAtId(const int &id);
+    void removeEtiquetteAll();
+    int nbBornes() const;
+    int nbEtiquette() const;
 
     string toString() const;
     InfoSommet* copy() const;

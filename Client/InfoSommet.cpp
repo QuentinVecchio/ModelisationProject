@@ -1,53 +1,111 @@
 #include "InfoSommet.h"
 
-InfoSommet::InfoSommet(const string &nom, const int &borneInfFenetre, const int &borneSupFenetre) {
+InfoSommet::InfoSommet(const string &nom) {
     this->nom = nom;
-    this->borneInfFenetre = borneInfFenetre;
-    this->borneSupFenetre = borneSupFenetre;
+    this->bornes = new vector<Fenetre *>();
+    this->etiquettes = new vector<Etiquette *>();
 }
 
 InfoSommet::InfoSommet() {
     this->nom = "NULL";
-    this->borneInfFenetre = this->borneSupFenetre = 0;
+    this->bornes = new vector<Fenetre *>();
+    this->etiquettes = new vector<Etiquette *>();
 }
 
 InfoSommet::InfoSommet(const InfoSommet &info) {
     this->nom = info.getNom();
-    this->borneInfFenetre = info.getBorneInfFenetre();
-    this->borneSupFenetre = info.getBorneSupFenetre();
+    this->bornes = info.bornes;
+    this->etiquettes = info.etiquettes;
 }
 
 InfoSommet::~InfoSommet() {
-    
+    this->bornes->clear();
+    this->etiquettes->clear();
 }
 
 string InfoSommet::getNom() const {
     return this->nom;
 }
 
-int InfoSommet::getBorneInfFenetre() const {
-    return this->borneInfFenetre;
+vector<Fenetre *>* InfoSommet::getBornes() const {
+    return this->bornes;
 }
 
-int InfoSommet::getBorneSupFenetre() const {
-    return this->borneSupFenetre;
+vector<Etiquette *>* InfoSommet::getEtiquettes() const {
+    return this->etiquettes;
+}
+
+Fenetre* InfoSommet::getBorneAtId(const int &id) const {
+    if(id >=  0 && id < this->bornes->size())
+        return this->bornes->at(id);
+    else
+        return NULL;
+}
+
+Etiquette* InfoSommet::getEtiquetteAtId(const int &id) const {
+    if(id >=  0 && id < this->etiquettes->size())
+        return this->etiquettes->at(id);
+    else
+        return NULL;
+}
+
+int InfoSommet::nbBornes() const {
+    return this->bornes->size();
+}
+
+int InfoSommet::nbEtiquette() const {
+    return this->etiquettes->size();
 }
 
 void InfoSommet::setNom(const string &s) {
     this->nom = s;
 }
 
-void InfoSommet::setBorneInfFenetre(const int &b) {
-    this->borneInfFenetre = b;
+void InfoSommet::setBorneAtId(const int &id, Fenetre *f) {
+    if(id >=  0 && id < this->bornes->size() && f != NULL)
+        this->bornes->at(id) = f;
 }
 
-void InfoSommet::setBorneSupFenetre(const int &b) {
-    this->borneSupFenetre = b;
+void InfoSommet::setEtiquetteAtId(const int &id, Etiquette *e) {
+    if(id >=  0 && id < this->etiquettes->size() && e != NULL)
+        this->etiquettes->at(id) = e;
 }
+
+void InfoSommet::addBorne(Fenetre *f) {
+    if(f != NULL)
+        this->bornes->push_back(f);
+}
+
+void InfoSommet::addEtiquette(Etiquette *e) {
+    if(e != NULL)
+        this->etiquettes->push_back(e);
+}
+
+void InfoSommet::removeBorneAtId(const int &id) {
+
+}
+
+void InfoSommet::removeEtiquetteAtId(const int &id) {
+
+}
+
+void InfoSommet::removeBorneAll() {
+    this->bornes->clear();
+}
+
+void InfoSommet::removeEtiquetteAll() {
+    this->etiquettes->clear();
+}
+
 
 string InfoSommet::toString() const {
     ostringstream oss;
-    oss <<  this->nom << ", borne Inf : " << this->borneInfFenetre << ", borne Sup : " << this->borneSupFenetre;
+    oss <<  this->nom << endl << "Bornes : " << endl;
+    for(int i = 0; i < this->nbBornes(); i++)
+        oss << *this->bornes->at(i) << " ";
+    oss <<  endl << "Etiquettes : " << endl;
+    for(int i = 0; i < this->nbEtiquette(); i++)
+        oss << *this->etiquettes->at(i) << " ";
     return oss.str();
 }
 

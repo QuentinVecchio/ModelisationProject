@@ -9,9 +9,9 @@ class Sommet : public GElement
 {
 private:
     int degre;
-    T v;
+    T *v;
 public:
-    Sommet<T>(const int clef, const T &v) : GElement(clef) {
+    Sommet<T>(const int clef, T *v) : GElement(clef) {
         this->setDegre(0);
         this->setV(v);
     }
@@ -22,14 +22,14 @@ public:
     }
     
     ~Sommet<T>() {
-        
+
     }
     
     int getDegre() const {
         return this->degre;
     }
     
-    T getV() const {
+    T* getV() const {
         return this->v;
     }
     
@@ -37,13 +37,13 @@ public:
         this->degre = degre;
     }
     
-    void setV(const T v) {
+    void setV(T *v) {
         this->v = v;
     }
     
     string toString() const {
         ostringstream oss;
-        oss << "Clef : " << this->getClef() << ", Degré : " <<  this->getDegre() << ", Valeur : " << this->v << endl;
+        oss << "Clef : " << this->getClef() << ", Degré : " <<  this->getDegre() << ", Valeur : " << *this->v << endl;
         return oss.str();
     }
 
@@ -55,5 +55,11 @@ public:
 template <class T>
 bool operator== (Sommet<T> const *s1, Sommet<T> const *s2) {
     return (s1->getClef() == s2->getClef()) && (s1->getV() == s2->getV());
+}
+
+template <class T>
+ostream &operator <<(ostream &os, const Sommet<T> &s){
+    os << s.toString();
+    return os;
 }
 #endif

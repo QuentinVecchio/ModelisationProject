@@ -23,10 +23,16 @@ HEADERS += Arete.h \
     PElement.h \
     Sommet.h \
     TestUnitaire.h \
-    InfoGraphe.h
+    InfoGraphe.h \
+    Fenetre.h \
+    Etiquette.h \
+    ValeurArete.h
 
 SOURCES += main.cpp \
     GElement.cpp \
     InfoArete.cpp \
     InfoSommet.cpp \
-    InfoGraphe.cpp
+    InfoGraphe.cpp \
+    Fenetre.cpp \
+    Etiquette.cpp \
+    ValeurArete.cpp

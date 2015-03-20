@@ -3,6 +3,8 @@
 
 #include <iostream>
 #include <sstream>
+#include <vector>
+#include "ValeurArete.h"
 
 using namespace std;
 
@@ -10,22 +12,25 @@ class InfoArete
 {
 private:
     string name;
-    int cout;
-    int temps;
+    vector<ValeurArete *> *valeurs;
+
 public:
     InfoArete();
-    InfoArete(const string &nom, const int &c, const int &t);
+    InfoArete(const string &nom);
     InfoArete(const InfoArete &i);
     ~InfoArete();
 
     string getNom() const;
-    int getCout() const;
-    int getTemps() const;
+    ValeurArete* getValeurAtId(const int &id) const;
+    vector<ValeurArete *>* getValeurs() const;
 
     void setNom(const string &name);
-    void setCout(const int &cout);
-    void setTemps(const int &temps);
+    void setValeurAtId(const int &id, ValeurArete *i);
 
+    int nbValeurs() const;
+    void addValeur(ValeurArete *f);
+    void removeAtId(const int &id);
+    void removeAll();
     string toString() const;
     InfoArete* copy() const;
 };

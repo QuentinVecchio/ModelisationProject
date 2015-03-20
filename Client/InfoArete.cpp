@@ -1,54 +1,70 @@
 #include "InfoArete.h"
 
-InfoArete::InfoArete(const string &nom, const int &c, const int &t) {
-    this->setCout(c);
+InfoArete::InfoArete(const string &nom) {
     this->setNom(nom);
-    this->setTemps(t);
+    this->valeurs = new vector<ValeurArete *>();
 }
 
 InfoArete::InfoArete() {
-    this->setCout(0);
+    this->setNom("");
+    this->valeurs = new vector<ValeurArete *>();
 }
 
 InfoArete::InfoArete(const InfoArete &i) {
-    this->cout = i.cout;
     this->name = i.name;
-    this->temps = i.temps;
+    this->valeurs = i.valeurs;
 }
 
 InfoArete::~InfoArete() {
-    
+    this->valeurs->clear();
 }
 
 string InfoArete::getNom() const {
     return this->name;
 }
 
-int InfoArete::getCout() const {
-    return this->cout;
+vector<ValeurArete *>* InfoArete::getValeurs() const {
+    return this->valeurs;
 }
 
-int InfoArete::getTemps() const {
-    return this->temps;
+ValeurArete* InfoArete::getValeurAtId(const int &id) const {
+    if(id >=  0 && id < this->valeurs->size())
+        return this->valeurs->at(id);
+    else
+        return NULL;
 }
 
 void InfoArete::setNom(const string &name) {
     this->name = name;
 }
 
-void InfoArete::setCout(const int &cout) {
-    if(cout >= 0)
-        this->cout = cout;
+void InfoArete::setValeurAtId(const int &id, ValeurArete *i) {
+    if(id >=  0 && id < this->valeurs->size() && i != NULL)
+        this->valeurs->at(id) = i;
 }
 
-void InfoArete::setTemps(const int &temps) {
-    if(temps >= 0)
-        this->temps = temps;
+int InfoArete::nbValeurs() const {
+    return this->valeurs->size();
+}
+
+void InfoArete::addValeur(ValeurArete *f) {
+    if(f != NULL)
+        this->valeurs->push_back(f);
+}
+
+void InfoArete::removeAtId(const int &id) {
+
+}
+
+void InfoArete::removeAll() {
+    this->valeurs->clear();
 }
 
 string InfoArete::toString() const {
     ostringstream oss;
-    oss << this->name << " (" << this->cout << "," << this->temps << ")";
+    oss << this->name << " ";
+    for(int i = 0; i < this->nbValeurs(); i++)
+        oss << *this->valeurs->at(i) << " ";
     return oss.str();
 }
 

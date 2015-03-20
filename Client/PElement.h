@@ -87,8 +87,8 @@ public:
         return NULL;
     }
     
-    static const string toString(const PElement<T> &l, const char *debut = "(", const char *separateur = ",", const char *fin = ")") {
-        const PElement<T> *l1;
+    static const string toString(PElement<T> &l, const char *debut = "(", const char *separateur = ",", const char *fin = ")") {
+        PElement<T> *l1;
         l1 = &l;
         string s = debut;
         while(l1 != NULL)
@@ -173,7 +173,7 @@ public:
 };
 
 template <class T>
-ostream &operator <<(ostream &os, const PElement<T> &l) {
+ostream &operator <<(ostream &os, PElement<T> &l) {
     os << PElement<T>::toString(l);
     return os;
 }

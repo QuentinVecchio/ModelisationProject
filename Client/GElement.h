@@ -13,7 +13,7 @@ private:
 protected:
     GElement(const int);
 public:
-    ~GElement();
+    virtual ~GElement();
     
     int getClef() const;
     void setClef(const int);
