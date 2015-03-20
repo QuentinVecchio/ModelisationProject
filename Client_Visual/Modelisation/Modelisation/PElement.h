@@ -52,7 +52,7 @@ public:
 		this->s = s;
 	}
 
-	static int taille(const PElement<T> *l) {
+	const static int taille(const PElement<T> *l) {
 		if (l == NULL)
 			return 0;
 		else

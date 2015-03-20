@@ -134,7 +134,7 @@ void InfoGraphe::setRessource(const int &n) {
 
 PElement<Sommet<InfoSommet> >* InfoGraphe::algorithmeACorrectionEtiquette(InfoGraphe * ig) {
 	//Déclarations des variables
-	vector<Etiquette *>* etiq[ig->graphe->nombreSommets()];//ETIQ
+	vector<Etiquette*> * etiq[ig->graphe->nombreSommets()];//ETIQ
 	PElement<Sommet<InfoSommet> >* list = NULL;//LIST
 	PElement<Sommet<InfoSommet> >* chemin = NULL;//LIST
 	int i = 0;//Les clefs commence à 1
