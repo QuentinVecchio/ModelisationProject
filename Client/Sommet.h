@@ -53,7 +53,7 @@ public:
 };
 
 template <class T>
-bool operator== (Sommet<T> const *s1, Sommet<T> const *s2) {
+bool operator== (Sommet<T> *s1, Sommet<T> *s2) {
     return (s1->getClef() == s2->getClef()) && (s1->getV() == s2->getV());
 }
 
