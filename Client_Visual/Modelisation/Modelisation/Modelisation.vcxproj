@@ -80,7 +80,6 @@
     <ClInclude Include="ValeurArete.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Arete.cpp" />
     <ClCompile Include="Etiquette.cpp" />
     <ClCompile Include="Fenetre.cpp" />
     <ClCompile Include="GElement.cpp" />

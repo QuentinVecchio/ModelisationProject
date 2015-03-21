@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 #include "Sommet.h"
 #include "Arete.h"

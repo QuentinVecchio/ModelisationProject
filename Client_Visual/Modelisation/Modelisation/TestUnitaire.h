@@ -1,4 +1,4 @@
-//#include "InfoGraphe.h"
+#include "InfoGraphe.h"
 #include "InfoSommet.h"
 #include "InfoArete.h"
 #include "Sommet.h"
@@ -6,6 +6,7 @@
 #include "Graphe.h"
 #include "InfoGraphe.h"
 #include "ValeurArete.h"
+#include "Fenetre.h"
 
 void testUnitaireInfoSommet() {
 	InfoSommet *info = new InfoSommet("test");
@@ -48,7 +49,7 @@ void testUnitaireGraphe() {
 
 void testUnitaireInfoGraphe(const char *lien) {
 	InfoGraphe *g = new InfoGraphe(lien);
-	//cout << *g << endl;
-	PElement<Sommet<InfoSommet> > *chemin = InfoGraphe::algorithmeACorrectionEtiquette(g);
-	cout << *chemin << endl;
+	cout << *g << endl;
+	//PElement<Sommet<InfoSommet> > *chemin = InfoGraphe::algorithmeACorrectionEtiquette(g);
+	//cout << *chemin << endl;
 }

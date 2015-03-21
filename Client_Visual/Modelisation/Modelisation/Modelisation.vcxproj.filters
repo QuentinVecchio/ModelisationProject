@@ -59,9 +59,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Arete.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Etiquette.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

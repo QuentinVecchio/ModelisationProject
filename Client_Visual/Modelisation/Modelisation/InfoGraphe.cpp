@@ -12,7 +12,8 @@ InfoGraphe::InfoGraphe(const char *lienVersFichier) {
 		while (getline(file, line)) {
 			if (enleveEspace(line) == "sectionSommets") {
 				while (getline(file, line)) {
-					if (line == "") //On passe dans une nouvelle section
+					getline(file, line);
+					if (enleveEspace(line) == "") //On passe dans une nouvelle section 
 						break;
 					else {
 						vector<string> *informations = splitString(line, ' ');
@@ -37,6 +38,7 @@ InfoGraphe::InfoGraphe(const char *lienVersFichier) {
 			}
 			else if (enleveEspace(line) == "sectionArcs") {
 				while (getline(file, line)) {
+					getline(file, line);
 					if (line == "") //On passe dans une nouvelle section
 						break;
 					else {
@@ -67,12 +69,14 @@ InfoGraphe::InfoGraphe(const char *lienVersFichier) {
 			}
 			else if (enleveEspace(line) == "source") {
 				getline(file, line);
+				getline(file, line);
 				if (this->getSommetByValue(enleveEspace(line)))
 					this->source = enleveEspace(line);
 				else
 					cout << "La source n'est pas dans le graphe, fichier corrompu." << endl;
 			}
 			else if (enleveEspace(line) == "puit") {
+				getline(file, line);
 				getline(file, line);
 				if (this->getSommetByValue(enleveEspace(line)))
 					this->puit = enleveEspace(line);
@@ -134,7 +138,7 @@ void InfoGraphe::setRessource(const int &n) {
 
 PElement<Sommet<InfoSommet> >* InfoGraphe::algorithmeACorrectionEtiquette(InfoGraphe * ig) {
 	//Déclarations des variables
-	vector<Etiquette*> * etiq[ig->graphe->nombreSommets()];//ETIQ
+	vector<Etiquette*> * etiq[30];//ETIQ
 	PElement<Sommet<InfoSommet> >* list = NULL;//LIST
 	PElement<Sommet<InfoSommet> >* chemin = NULL;//LIST
 	int i = 0;//Les clefs commence à 1
