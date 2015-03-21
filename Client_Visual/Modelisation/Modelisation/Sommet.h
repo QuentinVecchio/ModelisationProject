@@ -40,7 +40,7 @@ public:
 
 	string toString() const {
 		ostringstream oss;
-		oss << "Clef : " << this->getClef() << ", Degré : " << this->getDegre() << ", Valeur : " << *this->v << endl;
+		oss << "Clef : " << this->getClef() << ", Degre : " << this->getDegre() << ", Valeur : " << *this->v << endl;
 		return oss.str();
 	}
 
