@@ -117,7 +117,7 @@ public:
 		return NULL;
 	}
 
-	PElement< pair< Sommet<T>*, Arete<S, T>* > >  *adjacences(Sommet<T> * s) {
+	 PElement< pair< Sommet<T>*, Arete<S, T>* > >  *adjacences(Sommet<T> * s) {
 		if (this->listeSommets->appartient(s, this->listeSommets))
 		{
 			PElement<Arete<S, T> > *l;
