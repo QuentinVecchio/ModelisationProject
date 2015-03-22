@@ -136,6 +136,38 @@ void InfoGraphe::setRessource(const int &n) {
 		this->nbRessource = n;
 }
 
+// Réucpération des voisins selon l'odre des clefs
+bool InfoGraphe::estPlusPetitOuEgalClef(const pair< Sommet<InfoSommet>*, Arete<InfoArete, InfoSommet>* > * p1, const pair< Sommet<InfoSommet>*, Arete<InfoArete, InfoSommet>* > * p2){
+	return p1->first->getClef() <= p2->first->getClef();
+}
+
+PElement< pair< Sommet<InfoSommet>*, Arete<InfoArete, InfoSommet>* > >  * InfoGraphe::voisinsSelonClef(Sommet<InfoSommet> * s){
+	PElement< pair< Sommet<InfoSommet>*, Arete<InfoArete, InfoSommet>* > > * voisins = InfoGraphe::voisinsSelonClef(s);
+	PElement< pair< Sommet<InfoSommet>*, Arete<InfoArete, InfoSommet>* > > * l;
+	pair< Sommet<InfoSommet>*, Arete<InfoArete, InfoSommet>* > * tmp;
+	do{
+		tmp = PElement< pair< Sommet<InfoSommet>*, Arete<InfoArete, InfoSommet>* > >::depiler(voisins);
+		PElement< pair< Sommet<InfoSommet>*, Arete<InfoArete, InfoSommet>* > >::insertionOrdonnee(tmp, l, estPlusPetitOuEgalClef);
+	} while (PElement< pair< Sommet<InfoSommet>*, Arete<InfoArete, InfoSommet>* > >::taille(voisins) != 0);
+	return l;
+}
+
+//Récupération des voisins selon l'odre alphabétique du nom
+bool InfoGraphe::estPlusPetitOuEgalNom(const pair< Sommet<InfoSommet>*, Arete<InfoArete, InfoSommet>* > * p1, const pair< Sommet<InfoSommet>*, Arete<InfoArete, InfoSommet>* > * p2){
+	return p1->first->getV()->getNom().begin().operator<=(p2->first->getV()->getNom().begin());
+}
+
+PElement< pair< Sommet<InfoSommet>*, Arete<InfoArete, InfoSommet>* > >  * InfoGraphe::voisinsSelonNom(Sommet<InfoSommet> * s){
+	PElement< pair< Sommet<InfoSommet>*, Arete<InfoArete, InfoSommet>* > > * voisins = InfoGraphe::voisinsSelonClef(s);
+	PElement< pair< Sommet<InfoSommet>*, Arete<InfoArete, InfoSommet>* > > * l;
+	pair< Sommet<InfoSommet>*, Arete<InfoArete, InfoSommet>* > * tmp;
+	do{
+		tmp = PElement< pair< Sommet<InfoSommet>*, Arete<InfoArete, InfoSommet>* > >::depiler(voisins);
+		PElement< pair< Sommet<InfoSommet>*, Arete<InfoArete, InfoSommet>* > >::insertionOrdonnee(tmp, l, estPlusPetitOuEgalNom);
+	} while (PElement< pair< Sommet<InfoSommet>*, Arete<InfoArete, InfoSommet>* > >::taille(voisins) != 0);
+	return l;
+}
+
 PElement<Sommet<InfoSommet> >* InfoGraphe::algorithmeACorrectionEtiquette(InfoGraphe * ig) {
 	//Déclarations des variables
 	vector<Etiquette*> * etiq[30];//ETIQ
@@ -153,7 +185,8 @@ PElement<Sommet<InfoSommet> >* InfoGraphe::algorithmeACorrectionEtiquette(InfoGr
 		Sommet<InfoSommet>* xi = PElement<Sommet<InfoSommet> >::depiler(list);//Choisir xi ∈ LIST; LIST ← LIST − {xi};
 		Sommet<InfoSommet>* xd = NULL;
 		cout << "Sommet depilé : " << xi->getV()->getNom() << endl;
-		PElement< pair< Sommet<InfoSommet>*, Arete<InfoArete, InfoSommet>* > > *voisins = ig->graphe->adjacences(xi);
+		PElement< pair< Sommet<InfoSommet>*, Arete<InfoArete, InfoSommet>* > > *voisins = ig->voisinsSelonClef(xi);
+		//PElement< pair< Sommet<InfoSommet>*, Arete<InfoArete, InfoSommet>* > > *voisins = ig->graphe->adjacences(xi);
 		i = xi->getClef();
 		while (voisins != NULL) { //pour tous les xj ∈ successeurs(xi) faire
 			for (int index = 0; index<etiq[i]->size(); index++) { //pour tous les E ∈ ETIQ(i) faire
