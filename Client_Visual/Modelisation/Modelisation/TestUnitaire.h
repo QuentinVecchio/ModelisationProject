@@ -8,6 +8,11 @@
 #include "ValeurArete.h"
 #include "Fenetre.h"
 
+Sommet<InfoSommet>* depilageFifo(PElement<Sommet<InfoSommet> >*&list){
+	PElement<Sommet<InfoSommet> >::reverse(list);
+	return PElement<Sommet<InfoSommet> >::depiler(list);
+}
+
 void testUnitaireInfoSommet() {
 	InfoSommet *info = new InfoSommet("test");
 	info->addBorne(new Fenetre(0, 7));
@@ -49,10 +54,10 @@ void testUnitaireGraphe() {
 
 void testUnitaireInfoGraphe(const char *lien) {
 	InfoGraphe *g = new InfoGraphe(lien);
-	//cout << *g << endl;
-	vector<PElement<Sommet<InfoSommet> >*>* chemins = InfoGraphe::algorithmeACorrectionEtiquette(g);
-	for (int i = 0; i < chemins->size();i++)
-		cout << *chemins->at(i) << endl;
+	cout << *g << endl;
+	vector<PElement<Sommet<InfoSommet> >*>* chemins = InfoGraphe::algorithmeACorrectionEtiquette(g, depilageFifo);
+	/*for (int i = 0; i < chemins->size();i++)
+		cout << *chemins->at(i) << endl;*/
 }
 
 void testUnitaireListe() {

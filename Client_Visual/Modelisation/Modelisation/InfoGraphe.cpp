@@ -207,6 +207,14 @@ void InfoGraphe::parcour(Sommet<InfoSommet>* depart, Sommet<InfoSommet>* arrive,
 	if (depart->getV()->getNom() != arrive->getV()->getNom()) {
 		for (int i = 0; i < depart->getV()->getEtiquettes()->size(); i++){
 			sommetAPrendre = ig->getSommetByValue(depart->getV()->getEtiquetteAtId(i)->getPredecesseur());
+			if (i > 0){
+				PElement<Sommet<InfoSommet>>*ptr = chemins->at(n + i - 1);
+				while (ptr != NULL) {
+					chemins->at(n+i) = new PElement<Sommet<InfoSommet> >(ptr->getV(), chemins->at(n+i));
+					ptr = ptr->getS();
+				}
+				PElement<Sommet<InfoSommet> >::reverse(chemins->at(n + i));
+			}
 			parcour(sommetAPrendre, arrive, chemins, n+i, ig);
 		}
 	}
