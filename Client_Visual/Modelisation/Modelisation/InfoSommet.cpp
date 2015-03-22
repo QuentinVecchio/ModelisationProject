@@ -61,6 +61,11 @@ void InfoSommet::setNom(const string &s) {
 	this->nom = s;
 }
 
+void InfoSommet::setEtiquettes(vector<Etiquette *> *etiquettes){
+	if (etiquettes != NULL)
+		this->etiquettes = etiquettes;
+}
+
 void InfoSommet::setBorneAtId(const int &id, Fenetre *f) {
 	if (id >= 0 && id < this->bornes->size() && f != NULL)
 		this->bornes->at(id) = f;
