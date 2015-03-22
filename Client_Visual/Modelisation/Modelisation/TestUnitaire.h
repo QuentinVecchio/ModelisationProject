@@ -9,8 +9,37 @@
 #include "Fenetre.h"
 
 Sommet<InfoSommet>* depilageFifo(PElement<Sommet<InfoSommet> >*&list){
+//	cout << "Depilage selon FIFO" << endl;
 	PElement<Sommet<InfoSommet> >::reverse(list);
 	return PElement<Sommet<InfoSommet> >::depiler(list);
+}
+
+Sommet<InfoSommet>* depilageClef(PElement<Sommet<InfoSommet> >*&list){
+//	cout << "Depilage selon la clef" << endl;
+	PElement<Sommet<InfoSommet> >* l;
+	Sommet<InfoSommet> * min;
+	min = list->getByPosition(0);
+	for (l = list; l; l = l->getS()){
+		if (l->getV()->getClef() < min->getClef()){
+			min = l->getV();
+		}
+	}
+	PElement<Sommet<InfoSommet> >::retire(min, list);
+	return min;
+}
+
+Sommet<InfoSommet>* depilageNom(PElement<Sommet<InfoSommet> >*&list){
+//	cout << "Depilage selon le nom" << endl;
+	PElement<Sommet<InfoSommet> >* l;
+	Sommet<InfoSommet> * min;
+	min = list->getByPosition(0);
+	for (l = list; l; l = l->getS()){
+		if (l->getV()->getV()->getNom() < min->getV()->getNom()){
+			min = l->getV();
+		}
+	}
+	PElement<Sommet<InfoSommet> >::retire(min, list);
+	return min;
 }
 
 void testUnitaireInfoSommet() {
@@ -54,10 +83,12 @@ void testUnitaireGraphe() {
 
 void testUnitaireInfoGraphe(const char *lien) {
 	InfoGraphe *g = new InfoGraphe(lien);
-	cout << *g << endl;
-	vector<PElement<Sommet<InfoSommet> >*>* chemins = InfoGraphe::algorithmeACorrectionEtiquette(g, depilageFifo);
-	/*for (int i = 0; i < chemins->size();i++)
-		cout << *chemins->at(i) << endl;*/
+	//cout << *g << endl;
+	//vector<PElement<Sommet<InfoSommet> >*>* chemins = InfoGraphe::algorithmeACorrectionEtiquette(g, depilageFifo);
+	//vector<PElement<Sommet<InfoSommet> >*>* chemins = InfoGraphe::algorithmeACorrectionEtiquette(g, depilageClef);
+	vector<PElement<Sommet<InfoSommet> >*>* chemins = InfoGraphe::algorithmeACorrectionEtiquette(g, depilageNom);
+	//for (int i = 0; i < chemins->size();i++)
+	//	cout << *chemins->at(i) << endl;
 }
 
 void testUnitaireListe() {

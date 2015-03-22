@@ -162,10 +162,11 @@ public:
 	static bool retire(const T * a, PElement<T> *&l) {
 		if (l != NULL)
 		{
-			if (l->getS()->getV() == a)
+			if (l->getV() == a)
 			{
-				PElement<T> *e = l->getS();
-				l->setS(e->getS());
+				cout << "Element a supprimer = " << l->getV()->getClef() << endl;
+				PElement<T> *e = l;
+				l = l->getS();
 				delete e;
 				return true;
 			}
