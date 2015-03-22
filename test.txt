@@ -1,0 +1,55 @@
+﻿#Instance graphe0 à 4 sommets et 6 arcs
+
+
+
+ressources 1
+
+
+
+sectionSommets
+
+s0 0 0
+
+i1 0 5
+
+i2 0 7
+
+i3 0 8
+
+p0 0 10
+
+
+
+sources
+
+
+s0
+
+
+
+puits
+
+p0
+
+
+
+sectionArcs
+
+arc01 s0 i1 4 3
+
+arc02 s0 i2 8 2
+
+arc03 i1 i2 4 3
+
+arc04 i1 i3 2 6
+
+arc05 i2 i3 3 4
+
+arc06 i2 p0 2 6
+
+arc07 i3 p0 3 4
+
+
+
+sectionGraphe
+graphe1 s1 p1
