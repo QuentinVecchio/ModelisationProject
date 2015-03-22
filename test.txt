@@ -2,7 +2,7 @@
 
 
 
-ressource 1
+ressources 1
 
 
 
@@ -20,13 +20,14 @@ p0 0 10
 
 
 
-source
+sources
+
 
 s0
 
 
 
-puit
+puits
 
 p0
 

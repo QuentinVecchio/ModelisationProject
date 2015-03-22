@@ -33,7 +33,7 @@ public:
 	void setRessource(const int &n);
 
 	static vector<PElement<Sommet<InfoSommet> >*>* algorithmeACorrectionEtiquette(InfoGraphe * ig);
-	static void parcour(Sommet<InfoSommet>* depart, vector<Etiquette*> *etiquettes[], vector<PElement<Sommet<InfoSommet> >*>* chemins, int n, InfoGraphe * ig);
+	static void parcour(Sommet<InfoSommet>* depart, Sommet<InfoSommet>* arrive, vector<PElement<Sommet<InfoSommet> >*>* chemins, int n, InfoGraphe * ig);
 	vector<Etiquette *>* Pareto(vector<Etiquette *>* ensemble);
 	Sommet<InfoSommet>* getSommetByValue(const string &nom) const;
 	string toString() const;

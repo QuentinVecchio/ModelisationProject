@@ -29,6 +29,7 @@ public:
 	void setNom(const string &s);
 	void setBorneAtId(const int &id, Fenetre *f);
 	void setEtiquetteAtId(const int &id, Etiquette *e);
+	void setEtiquettes(vector<Etiquette *> *etiquettes);
 
 	void addBorne(Fenetre *f);
 	void addEtiquette(Etiquette *);
