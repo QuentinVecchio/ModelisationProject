@@ -32,7 +32,7 @@ public:
 	void setPuit(Sommet<InfoSommet>* puit);
 	void setRessource(const int &n);
 
-	static vector<PElement<Sommet<InfoSommet> >*>* algorithmeACorrectionEtiquette(InfoGraphe * ig);
+	static vector<PElement<Sommet<InfoSommet> >*>* algorithmeACorrectionEtiquette(InfoGraphe * ig, Sommet<InfoSommet>* (fonction(PElement<Sommet<InfoSommet> >*&)));
 	static void parcour(Sommet<InfoSommet>* depart, Sommet<InfoSommet>* arrive, vector<PElement<Sommet<InfoSommet> >*>* chemins, int n, InfoGraphe * ig);
 	vector<Etiquette *>* Pareto(vector<Etiquette *>* ensemble);
 	Sommet<InfoSommet>* getSommetByValue(const string &nom) const;

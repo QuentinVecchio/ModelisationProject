@@ -17,7 +17,6 @@ InfoGraphe::InfoGraphe(const char *lienVersFichier) {
 						break;
 					else {
 						vector<string> *informations = splitString(line, ' ');
-						cout << informations->size()  << endl;
 						if (informations->size() != (1 + this->nbRessource * 2)) {
 							cout << "Impossible de creer un sommet, fichier corrompu." << endl;
 							return;
@@ -69,16 +68,18 @@ InfoGraphe::InfoGraphe(const char *lienVersFichier) {
 				}
 			}
 			else if (enleveEspace(line) == "sources") {
-				getline(file, line);
-				getline(file, line);
+				do{
+					getline(file, line);
+				} while (enleveEspace(line) == "");
 				if (this->getSommetByValue(enleveEspace(line)))
 					this->source = enleveEspace(line);
 				else
 					cout << "La source n'est pas dans le graphe, fichier corrompu." << endl;
 			}
 			else if (enleveEspace(line) == "puits") {
-				getline(file, line);
-				getline(file, line);
+				do{
+					getline(file, line);
+				} while (enleveEspace(line) == "");
 				if (this->getSommetByValue(enleveEspace(line)))
 					this->puit = enleveEspace(line);
 				else
@@ -137,7 +138,7 @@ void InfoGraphe::setRessource(const int &n) {
 		this->nbRessource = n;
 }
 
-vector<PElement<Sommet<InfoSommet> >*>* InfoGraphe::algorithmeACorrectionEtiquette(InfoGraphe * ig) {
+vector<PElement<Sommet<InfoSommet> >*>* InfoGraphe::algorithmeACorrectionEtiquette(InfoGraphe * ig, Sommet<InfoSommet>* (fonction(PElement<Sommet<InfoSommet> >*&))) {
 	//Déclarations des variables
 	PElement<Sommet<InfoSommet> >* list = NULL;//LIST
 	vector<PElement<Sommet<InfoSommet> >*>* chemins = new vector<PElement<Sommet<InfoSommet> >*>();//Chemin que l'on renvoit
@@ -145,8 +146,10 @@ vector<PElement<Sommet<InfoSommet> >*>* InfoGraphe::algorithmeACorrectionEtiquet
 	ig->getSource()->getV()->addEtiquette(new Etiquette("null", 0, 0));//ETIQ(o)←{"",0,0}
 	while (PElement<Sommet<InfoSommet> >::taille(list) != 0) { //tant que LIST est pas vide faire
 		cout << "Taille liste : " << PElement<Sommet<InfoSommet> >::taille(list) << endl;
-		PElement<Sommet<InfoSommet> >::reverse(list);
-		Sommet<InfoSommet>* xi = PElement<Sommet<InfoSommet> >::depiler(list);//Choisir xi ∈ LIST; LIST ← LIST − {xi};
+		/*Cette partie est modulaire*/
+			Sommet<InfoSommet>* xi = fonction(list);//Choisir xi ∈ LIST; LIST ← LIST − {xi};
+		/***************************/
+			cout << "Taille liste : " << PElement<Sommet<InfoSommet> >::taille(list) << endl;
 		cout << "Sommet depile : " << xi->getV()->getNom() << endl;
 		PElement< pair< Sommet<InfoSommet>*, Arete<InfoArete, InfoSommet>* > > *voisins = ig->graphe->adjacences(xi);
 		while (voisins != NULL) { //pour tous les xj ∈ successeurs(xi) faire
@@ -201,13 +204,9 @@ vector<PElement<Sommet<InfoSommet> >*>* InfoGraphe::algorithmeACorrectionEtiquet
 void InfoGraphe::parcour(Sommet<InfoSommet>* depart, Sommet<InfoSommet>* arrive, vector<PElement<Sommet<InfoSommet> >*>* chemins, int n, InfoGraphe * ig){
 	chemins->at(n) = new PElement<Sommet<InfoSommet> >(depart, chemins->at(n));//Ajout du nouveau sommet dans le chemin
 	Sommet<InfoSommet>* sommetAPrendre = NULL;//Projet sommet à visiter.
-	if (depart->getV()->getNom() == arrive->getV()->getNom()) {
-		cout << "fini" << endl;//On arrete on est à la fin.
-	}
-	else{
+	if (depart->getV()->getNom() != arrive->getV()->getNom()) {
 		for (int i = 0; i < depart->getV()->getEtiquettes()->size(); i++){
 			sommetAPrendre = ig->getSommetByValue(depart->getV()->getEtiquetteAtId(i)->getPredecesseur());
-			cout << "Sommet a visite : " << sommetAPrendre->getV()->getNom() << endl;
 			parcour(sommetAPrendre, arrive, chemins, n+i, ig);
 		}
 	}
