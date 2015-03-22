@@ -122,6 +122,43 @@ public:
 			return NULL;
 	}
 
+	static void reverse(PElement<T> *&l) {
+		if (l != NULL)
+		{
+			PElement<T> *nvListe = NULL;
+			PElement<T> *e = l;
+			while (e != NULL) {
+				nvListe = new PElement<T>(e->v, nvListe);
+				e = e->s;
+			}
+			l = nvListe;
+		}
+	}
+
+	static T* depilerFIFO(PElement<T> *&l) {
+		if (l != NULL)
+		{
+			PElement<T> *e = l;
+			while (e != NULL){
+				cout << *e->getV() << endl;
+				if (e->s == NULL) {
+					T *v = e->v;
+					delete e;
+					return v;
+				}else if (e->s->s == NULL) {
+					T *v = e->s->v;
+					delete e->s;
+					e->s = NULL;
+					return v;
+				}
+				e = e->s;
+			}
+			return NULL;
+		}
+		else
+			return NULL;
+	}
+
 	static bool retire(const T * a, PElement<T> *&l) {
 		if (l != NULL)
 		{
