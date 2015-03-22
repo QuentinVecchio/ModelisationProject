@@ -49,7 +49,19 @@ void testUnitaireGraphe() {
 
 void testUnitaireInfoGraphe(const char *lien) {
 	InfoGraphe *g = new InfoGraphe(lien);
-	cout << *g << endl;
-	//PElement<Sommet<InfoSommet> > *chemin = InfoGraphe::algorithmeACorrectionEtiquette(g);
-	//cout << *chemin << endl;
+	//cout << *g << endl;
+	vector<PElement<Sommet<InfoSommet> >*>* chemins = InfoGraphe::algorithmeACorrectionEtiquette(g);
+	for (int i = 0; i < chemins->size();i++)
+		cout << *chemins->at(i) << endl;
+}
+
+void testUnitaireListe() {
+	int a = 1;
+	int b = 2;
+	int c = 3;
+	int d = 4;
+	PElement<int> *liste = new PElement<int>(&a, new PElement<int>(&b, new PElement<int>(&c, new PElement<int>(&d, NULL))));
+	cout << *liste << endl;
+	PElement<int>::reverse(liste);
+	cout << *liste << endl;
 }

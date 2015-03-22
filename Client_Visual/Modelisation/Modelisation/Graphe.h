@@ -128,11 +128,6 @@ public:
 				{
 					r = new PElement<pair<Sommet<T> *, Arete<S, T>*> >(new pair< Sommet<T> *, Arete<S, T>* >(l->getV()->getFinal(), l->getV()), r);
 				}
-				else
-				{
-					if (s == l->getV()->getFinal())
-						r = new PElement< pair< Sommet<T> *, Arete<S, T>* > >(new pair< Sommet<T> *, Arete<S, T>* >(l->getV()->getInital(), l->getV()), r);
-				}
 			}
 			return r;
 		}

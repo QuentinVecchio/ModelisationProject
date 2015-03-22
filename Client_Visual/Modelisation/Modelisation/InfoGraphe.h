@@ -32,7 +32,8 @@ public:
 	void setPuit(Sommet<InfoSommet>* puit);
 	void setRessource(const int &n);
 
-	static PElement<Sommet<InfoSommet> >* algorithmeACorrectionEtiquette(InfoGraphe * ig);
+	static vector<PElement<Sommet<InfoSommet> >*>* algorithmeACorrectionEtiquette(InfoGraphe * ig);
+	static void parcour(Sommet<InfoSommet>* depart, vector<Etiquette*> *etiquettes[], vector<PElement<Sommet<InfoSommet> >*>* chemins, int n, InfoGraphe * ig);
 	vector<Etiquette *>* Pareto(vector<Etiquette *>* ensemble);
 	Sommet<InfoSommet>* getSommetByValue(const string &nom) const;
 	string toString() const;
