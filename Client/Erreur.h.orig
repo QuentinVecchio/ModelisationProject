@@ -1,0 +1,12 @@
+#include <iostream>
+
+using namespace std;
+
+void Erreur(string s) {
+    cout << s << endl;
+}
+
+void ErreurExit(string s) {
+    cout << s << endl;
+    exit(1);
+}

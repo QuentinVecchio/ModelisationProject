@@ -38,10 +38,6 @@ public:
 	Sommet<InfoSommet>* getSommetByValue(const string &nom) const;
 	string toString() const;
 	InfoGraphe* copy() const;
-	static bool estPlusPetitOuEgalClef(const pair< Sommet<InfoSommet>*, Arete<InfoArete, InfoSommet>* > * p1, const pair< Sommet<InfoSommet>*, Arete<InfoArete, InfoSommet>* > * p2);
-	static PElement< pair< Sommet<InfoSommet>*, Arete<InfoArete, InfoSommet>* > >  *voisinsSelonClef(Sommet<InfoSommet> * s);
-	static bool estPlusPetitOuEgalNom(const pair< Sommet<InfoSommet>*, Arete<InfoArete, InfoSommet>* > * p1, const pair< Sommet<InfoSommet>*, Arete<InfoArete, InfoSommet>* > * p2);
-	static PElement< pair< Sommet<InfoSommet>*, Arete<InfoArete, InfoSommet>* > >  *voisinsSelonNom(Sommet<InfoSommet> * s);
 };
 
 ostream &operator <<(ostream &os, const InfoGraphe &i);
