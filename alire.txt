@@ -1,0 +1,9 @@
+Vous trouverez l'application dans le dossier client.
+Dans le fichier main.cpp, vous faites appelle à une fonction de Test Unitaire.
+Cette fonction prend en paramètre le lien vers le fichier de test.
+Dans le fichier TestUnitaire.h, à la fonction testUnitaireInfoGraphe, un graphe sera créé. C'est dans cette fonction que l'on applique l'algo de recherche du plus court chemin.
+La fonction renvoie un vector de liste de sommmet. Pour afficher et voir les résultats vous pouvez appliquer ces lignes de code :
+	for (int i = 0; i < chemins->size();i++)
+		cout << *chemins->at(i) << endl;
+
+Pour toute question, vous pouvez envoyer un mail à l'adresse vecchioquentin@hotmail.fr
