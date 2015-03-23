@@ -128,7 +128,7 @@ sources
 i1
 
 puits
-i120  0  441
+i120
 
 sectionArcs
 arc1  i1  i2  4  7
@@ -2449,5 +2449,4 @@ arc2315  i28  i31  1  14
 arc2316  i35  i42  5  1
 
 sectionGraphes
-
 graphe1 i  i1  i120

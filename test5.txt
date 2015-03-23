@@ -1,5 +1,4 @@
 # Graphe N = 20 ; M = 
-
 ressources 1
 
 sectionSommets
@@ -28,7 +27,7 @@ sources
 i_1
 
 puits
-i_20  3  794
+i_20
 
 sectionArcs
 arc_1_2  i_1  i_2  25  4

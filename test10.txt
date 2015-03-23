@@ -168,7 +168,7 @@ sources
 i1
 
 puits
-i160  0  367
+i160
 
 sectionArcs
 arc1  i1  i2  4  7
