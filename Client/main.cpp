@@ -1,18 +1,10 @@
-#ifndef MAIN_CPP
-#define MAIN_CPP
-
-#include <QApplication>
 #include <iostream>
 #include "TestUnitaire.h"
 
-using namespace std;
-
-int main(int argc, char * argv[]) {
-    QApplication a(argc, argv);
-    cout << "Projet Recherche et modelisation." << endl << "Programme fait par Dylan Koby et Quentin Vecchio" << endl << "Programme datant de 2015" << endl;
-    testUnitaireInfoGraphe("/Users/quentinvecchio/Desktop/test.txt");
-    cout << "Fini" << endl;
-    return a.exec();
-}
-
-#endif
+int main(){
+	cout << "Projet L3 Recherche et modélisation 2015." << "Programme fait par Dylan Koby et Quentin Vecchio." << endl;
+    testUnitaireInfoGraphe("/Users/quentinvecchio/Desktop/Projet_modelisation/test10.txt");
+    //testUnitaireInfoGraphe("C:/Users/DK/Documents/Projet_Graphe/test.txt");
+    //system("PAUSE");
+	return 0;
+} 

@@ -1,6 +1,4 @@
-#ifndef FENETRE_H
-#define FENETRE_H
-
+#pragma once
 #include <iostream>
 #include <sstream>
 
@@ -8,23 +6,23 @@ using namespace std;
 
 class Fenetre
 {
-private :
-    int borneInf;
-    int borneSup;
+private:
+	int borneInf;
+	int borneSup;
 public:
-    Fenetre(const int &inf, const int &sup);
-    Fenetre(const Fenetre &fen);
-    ~Fenetre();
+	Fenetre(const int &inf, const int &sup);
+	Fenetre(const Fenetre &fen);
+	~Fenetre();
 
-    int getBorneInf() const;
-    int getBorneSup() const;
+	int getBorneInf() const;
+	int getBorneSup() const;
 
-    void setBorneInf(const int &inf);
-    void setBorneSup(const int &sup);
+	void setBorneInf(const int &inf);
+	void setBorneSup(const int &sup);
 
-    string toString() const;
-    Fenetre* copy() const;
+	string toString() const;
+	Fenetre* copy() const;
 };
 
 ostream &operator <<(ostream &os, const Fenetre &fen);
-#endif // FENETRE_H
+

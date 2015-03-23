@@ -1,16 +1,13 @@
-#ifndef __projet_IA__Erreur__
-#define __projet_IA__Erreur__
-
+#pragma once
 #include <iostream>
 
 using namespace std;
 
 void Erreur(string s) {
-    cout << s << endl;
+	cout << s.c_str() << endl;
 }
 
 void ErreurExit(string s) {
-    cout << s << endl;
-    exit(1);
+	cout << s.c_str() << endl;
+	exit(1);
 }
-#endif
