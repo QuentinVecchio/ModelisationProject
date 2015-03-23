@@ -3,16 +3,17 @@
 ressources 1
 
 sectionSommets
-i1
-i2
-i3
-i4
-i5
-i6
-i7
-i8
-i9
-i10
+i1  0  0
+i2  2  12
+i3  15 25
+i4  5  15
+i5  1  36
+i6  3  47
+i7  1  41
+i8  1  58
+i9  4  58
+i10 0  68
+
 sources
 i1
 
@@ -60,5 +61,4 @@ arc37  i8  i10  15  19
 arc38  i9  i10  5  18
 
 sectionGraphes
-
 graphe1 i  i1  i10
