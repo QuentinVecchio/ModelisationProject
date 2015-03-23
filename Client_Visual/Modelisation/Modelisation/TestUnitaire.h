@@ -85,8 +85,8 @@ void testUnitaireInfoGraphe(const char *lien) {
 	InfoGraphe *g = new InfoGraphe(lien);
 	//cout << *g << endl;
 	//vector<PElement<Sommet<InfoSommet> >*>* chemins = InfoGraphe::algorithmeACorrectionEtiquette(g, depilageFifo);
-	//vector<PElement<Sommet<InfoSommet> >*>* chemins = InfoGraphe::algorithmeACorrectionEtiquette(g, depilageClef);
-	vector<PElement<Sommet<InfoSommet> >*>* chemins = InfoGraphe::algorithmeACorrectionEtiquette(g, depilageNom);
+	vector<PElement<Sommet<InfoSommet> >*>* chemins = InfoGraphe::algorithmeACorrectionEtiquette(g, depilageClef);
+	//vector<PElement<Sommet<InfoSommet> >*>* chemins = InfoGraphe::algorithmeACorrectionEtiquette(g, depilageNom);
 	//for (int i = 0; i < chemins->size();i++)
 	//	cout << *chemins->at(i) << endl;
 }
