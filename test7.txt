@@ -1,6 +1,6 @@
 # Graphe N = 100 ; M = 1694
 
-ressources r1
+ressources 1
 
 sectionSommets
 i1  0  0
